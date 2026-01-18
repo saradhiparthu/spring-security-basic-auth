@@ -10,12 +10,13 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-public class BasicAuthConfig {
+public class FormLoginConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
-                .httpBasic(Customizer.withDefaults());  // ✅ Use this form
+        http.authorizeHttpRequests(auth-> auth.anyRequest().authenticated())
+                .formLogin(Customizer.withDefaults())
+                .logout(logout-> logout.permitAll());
         return http.build();
     }
 
